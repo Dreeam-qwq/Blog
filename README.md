@@ -1,6 +1,20 @@
-# Dreeam的边缘临界
+# Dreeam 的边缘临界
 
 Dreeam 的个人博客，基于 [Hexo](https://hexo.io/) 框架，并使用 [Fluid](https://github.com/fluid-dev/hexo-theme-fluid) 主题
+
+## 📦 部署
+
+### 前置准备
+
+Node.js 18.20+
+
+### 常用命令
+
+- `pnpm install` - 安装依赖
+- `pnpm hexo server` - 预览网站
+- `pnpm hexo publish "Title"` - 发布草稿
+- `pnpm hexo generate` - 生成静态文件
+- `pnpm hexo deploy` - 部署到服务器
 
 ## ⚖️ 许可证
 
