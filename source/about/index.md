@@ -12,7 +12,7 @@ date: 2025-11-26 03:24:07
 ## ✨ 一些兴趣
 
 重度电子音乐爱好者，每天都离不开的那种（，喜欢各种曲风
-House，Techno，Drum & Bass，Dubstep，Trance，一些HardStyle 等等等等
+House、Techno、Drum & Bass、Dubstep、Trance、一些 HardStyle 等等等等
 
 目前喜欢的一部分创作者和厂牌
 
@@ -21,7 +21,7 @@ House，Techno，Drum & Bass，Dubstep，Trance，一些HardStyle 等等等等
 
 ## ✏️ 这里，为什么存在？
 
-其实在 2022 年的时候就已经计划搭一个博客了，只是因为各种原因，一直没抽出时间去研究博客该怎么搭、用什么框架比较合适。
+其实在 2022 年的时候就已经计划搭一个博客了，因为各种原因，一直没抽出时间去研究博客该怎么搭、用什么框架比较合适。
 
 我一直想写点东西给自己留个备份，尤其是一些代码分析，和一些自己觉得有意思，好玩的东西。
 
@@ -30,4 +30,4 @@ House，Techno，Drum & Bass，Dubstep，Trance，一些HardStyle 等等等等
 GitHub: [Dreeam-qwq](https://github.com/Dreeam-qwq)
 QQ: `2682173972`
 Discord: `dreeam___`
-网易云音乐: [Dreeam__](https://music.163.com/#/user/home?id=617605490)
+网易云音乐：[Dreeam__](https://music.163.com/#/user/home?id=617605490)
