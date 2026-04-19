@@ -1040,6 +1040,12 @@ links:
       avatar: "/img/blog-icon-wling.png"
     }
     - {
+      title: "DongShaoNB's Blog",
+      intro: "喜欢就坚持下去吧！",
+      link: "https://blog.dsnb.cc/",
+      avatar: "/img/blog-icon-dongshao.jpg"
+    }
+    - {
       title: "冰晶石的个人小站",
       intro: "专注于前沿技术分享的博客站",
       link: "https://blog.na3alf6.cn/",
