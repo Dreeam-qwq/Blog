@@ -112,7 +112,7 @@ deb https://security.debian.org/debian-security bookworm-security main contrib n
 
 保存退出。随后 `apt update` 和其他 apt 命令就可以正常使用了。
 
-## 安装基础工具
+### 安装基础工具
 
 我们先使用以下命令安装几乎必备的命令和基础工具，在后续的配置和运维中都是必不可少的。
 
@@ -369,7 +369,7 @@ nohup ./download.sh > aliyunpan.log 2>&1 &
 
 一些美化和自定义的配置，方便日常的运维。
 
-### Zsh
+### 安装 Zsh
 
 安装 Zsh 并设为默认 shell。
 
