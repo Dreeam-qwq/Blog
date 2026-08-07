@@ -19,7 +19,7 @@ TryHackMe 把这个房间标为 5 minute hacks，确实简单，5 mins 就够了
 
 因此就可以 LFI 路径遍历入手。网上搜索可以知道，LFI 路径遍历漏洞是利用各种方法来滥用输入的文件路径，来读取或者执行预期目录之外的东西。
 
-![](/img/write-up/writeup-lo-fi-1.png)
+![](/img/write-up/wp-lo-fi-1.png)
 
 通过观察页面，发现其他页面的跳转是直接引用目标页面的 PHP 文件（相对路径）。那么漏洞的利用方式就是构造自己的文件路径，来访问系统上的其他文件。这时候也暴露了这个网站使用的是 PHP 编写的。
 
@@ -32,7 +32,7 @@ TryHackMe 把这个房间标为 5 minute hacks，确实简单，5 mins 就够了
 拼凑进 URL：
 `http://IP/?page=../../../../../../../../etc/passwd`
 
-![](/img/write-up/writeup-lo-fi-2.png)
+![](/img/write-up/wp-lo-fi-2.png)
 
 那么验证了这种漏洞利用的方法确实可行，就可以找 flag 了。
 
@@ -40,7 +40,7 @@ TryHackMe 把这个房间标为 5 minute hacks，确实简单，5 mins 就够了
 
 鉴于 THM 上很多其他房间的 flag，如果是以文件形式存在的，都位于 `flag.txt` 中。所以我们可以大胆的猜测本房间的 flag 位于 `/flag.txt`
 
-![](/img/write-up/writeup-lo-fi-3.png)
+![](/img/write-up/wp-lo-fi-3.png)
 
 试一下，flag 就出来了。
 

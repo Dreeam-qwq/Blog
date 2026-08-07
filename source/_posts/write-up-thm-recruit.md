@@ -1,10 +1,10 @@
 ---
 title: 'Write-up: Recruit'
+categories:
+  - 网络安全
 tags:
   - TryHackMe
   - Web
-categories:
-  - 网络安全
 date: 2026-07-15 11:16:46
 ---
 
@@ -21,12 +21,12 @@ Recruit 刚刚推出了新的招聘门户，允许人力资源人员管理候选
 
 观察目标网站，是一个登陆界面。尝试了一下 SQL 盲注的身份验证绕过，发现并没有什么用。
 
-![](/img/write-up/writeup-recruit-1.png)
+![](/img/write-up/wp-recruit-1.png)
 
 查看各页面的源码，发现引用了 `api.php` 和 `file.php` 两个页面。
 页面内引用的 `/file.php?cv=URL` 代表可能存在 SSRF 或者 LFI。
 
-![](/img/write-up/writeup-recruit-2.png)
+![](/img/write-up/wp-recruit-2.png)
 
 尝试多次不同的 LFI payload 均显示如上提示。
 至此没啥线索和思路了，用 feroxbuster 扫一下。
@@ -42,7 +42,7 @@ feroxbuster -u http://IP -w /usr/share/wordlists/SecLists/Discovery/Web-Content/
 - 特定的端点用于内部 HR 的集成功能
 - 对敏感数据的访问是有用户身份限制的
 
-![](/img/write-up/writeup-recruit-3.png)
+![](/img/write-up/wp-recruit-3.png)
 
 这里很明显指的目录是 `/mail`，继续扫描 mail 目录，发现存在 `mail/mail.log` 文件。
 
@@ -50,7 +50,7 @@ feroxbuster -u http://IP -w /usr/share/wordlists/SecLists/Discovery/Web-Content/
 feroxbuster -u http://IP/mail -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -t 70
 ```
 
-![](/img/write-up/writeup-recruit-4.png)
+![](/img/write-up/wp-recruit-4.png)
 
 阅读日志，可知存在用户名 `hr`，和网站的配置文件 `config.php`。
 
@@ -65,18 +65,18 @@ feroxbuster -u http://IP/mail -w /usr/share/wordlists/SecLists/Discovery/Web-Con
 访问发现直接返回了 `config.php` 的源码。阅读可以发现硬编码了账号 `hr` 的密码。
 现在有了 HR 的账号凭证，回到主页登陆，成功在后台获得第一个 flag。
 
-![](/img/write-up/writeup-recruit-5.png)
+![](/img/write-up/wp-recruit-5.png)
 
 ## 0x3 Flag 2
 
 通过观察后台发现存在一个搜索框，这意味着可能存在 SQL 注入。
 引号可以用来干扰 SQL 查询逻辑，输个 `'` 进去康康，很容易的就触发了 SQL 报错，说明确实存在注入。
 
-![](/img/write-up/writeup-recruit-6.png)
+![](/img/write-up/wp-recruit-6.png)
 
 我们也可以利用 Flag 1 阶段发现的 LFI，直接查看并审计 `dashboard.php` 的源码，没有任何防护或参数化查询，确认存在 SQL 注入。
 
-![](/img/write-up/writeup-recruit-7.png)
+![](/img/write-up/wp-recruit-7.png)
 
 随后使用 UNION 注入来尝试枚举数据库的表结构，并提取数据。通过不断尝试，发现当前表有 4 列。
 
@@ -86,7 +86,7 @@ feroxbuster -u http://IP/mail -w /usr/share/wordlists/SecLists/Discovery/Web-Con
 
 需要注意的是，注入的 SQL 语句末尾的注释需要留个空格，让 SQL 数据库正确处理注释以忽略后面原有的语句，不然没办法正常注入。
 
-![](/img/write-up/writeup-recruit-8.png)
+![](/img/write-up/wp-recruit-8.png)
 
 通过以下 SQL 语句枚举数据库结构并提取数据：
 
@@ -111,11 +111,11 @@ feroxbuster -u http://IP/mail -w /usr/share/wordlists/SecLists/Discovery/Web-Con
 - `users` 表中存在列：`username`, `password`
 - 用户账号名和密码
 
-![](/img/write-up/writeup-recruit-9.png)
+![](/img/write-up/wp-recruit-9.png)
 
 登出现有账号，使用获取到的管理员凭证登陆，得到第二个 flag。
 
-![](/img/write-up/writeup-recruit-10.png)
+![](/img/write-up/wp-recruit-10.png)
 
 ## 0x4 结语
 
@@ -124,4 +124,4 @@ LFI 的学习房间实际上位于接下来的 Web Application Vulnerabilities I
 
 另外通过查看 `file.php` 源码，发现这个题目设计以一种比较抽象的方法实现 LFI，要是不参考其他 writeup 或者审计源码，还真想不出来用 `file://` 来访问本地文件（
 
-![](/img/write-up/writeup-recruit-11.png)
+![](/img/write-up/wp-recruit-11.png)
